@@ -1,279 +1,1590 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Jaga IGD - RS Dian Husada</title>
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laporan Jaga IGD</title>
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f4f7f9;
-        }
-        .shift-header {
-            color: white;
-            padding: 12px 16px;
-            border-radius: 0.75rem;
-            margin-top: 20px;
-            font-weight: 800;
-            font-size: 1.125rem;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            transition: opacity 0.2s;
-        }
-        .shift-header:hover { opacity: 0.9; }
-        .input-group label {
-            font-weight: 600;
-            color: #374151;
-            display: block;
-            margin-bottom: 4px;
-        }
-        .input-group input, .input-group textarea, .input-group select {
-            padding: 10px;
-            border: 2px solid #e5e7eb;
-            border-radius: 0.75rem;
-            width: 100%;
-            background-color: white;
-        }
-        .input-group input:focus { border-color: #0ea5e9; outline: none; }
-        .doctor-inputs { display: flex; gap: 8px; align-items: center; }
-        
-        /* Dark Mode Styles */
-        .dark { background-color: #1e293b !important; color: #e2e8f0 !important; }
-        .dark body { background-color: #1e293b !important; }
-        .dark .bg-white { background-color: #334155 !important; }
-        .dark input, .dark textarea, .dark select { background-color: #475569 !important; border-color: #64748b !important; color: #fff !important; }
-        .dark .text-gray-800, .dark .text-gray-700 { color: #f1f5f9 !important; }
-        .dark .bg-gray-100 { background-color: #1e293b !important; }
+      /* ============================
+         BASE STYLES (LIGHT MODE)
+      ============================ */
+      body {
+          font-family: 'Inter', sans-serif;
+          background-color: #f4f7f9;
+      }
+      .shift-header {
+          color: white;
+          padding: 12px 16px;
+          border-radius: 0.75rem;
+          margin-top: 20px;
+          font-weight: 800;
+          font-size: 1.125rem;
+          display: flex;
+          align-items: center;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+          transition: background-color 0.2s;
+      }
+      .shift-header:hover {
+          opacity: 0.9;
+      }
+      .input-group label {
+          font-weight: 600;
+          color: #374151;
+          display: block;
+          margin-bottom: 4px;
+      }
+      .input-group input, .input-group textarea, .input-group select {
+          padding: 10px;
+          border: 2px solid #e5e7eb;
+          border-radius: 0.75rem;
+          transition: all 0.2s;
+          background-color: white;
+          width: 100%;
+      }
+      .input-group input:focus, .input-group textarea:focus, .input-group select:focus {
+          border-color: #0ea5e9;
+          box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.3);
+          outline: none;
+      }
+      .input-row {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px;
+      }
+      .doctor-inputs {
+          display: flex;
+          gap: 8px;
+          align-items: center;
+      }
+      .doctor-inputs select,
+      .doctor-inputs input {
+          flex-grow: 1;
+          flex-basis: 0;
+          min-width: 0;
+      }
+      .doctor-inputs input {
+           text-align: center;
+      }
+      .input-group input, .input-group select, .input-group textarea {
+          width: 100%;
+      }
+
+      /* ============================
+           DARK MODE SOFT STYLES
+      ============================ */
+      .dark {
+          background-color: #1e293b !important;
+          color: #e2e8f0 !important;
+      }
+      .dark body {
+          background-color: #1e293b !important;
+      }
+      .dark .max-w-2xl {
+          background-color: #334155 !important;
+          color: #e2e8f0 !important;
+      }
+      .dark input,
+      .dark textarea,
+      .dark select {
+          background-color: #475569 !important;
+          border-color: #64748b !important;
+          color: #f1f5f9 !important;
+      }
+      .dark .bg-white {
+          background-color: #3b4758 !important;
+      }
+      .dark .bg-gray-100 {
+          background-color: #475569 !important;
+      }
+      .dark .text-gray-800 {
+          color: #f1f5f9 !important;
+      }
+      .dark .text-gray-600,
+      .dark .text-gray-500 {
+          color: #cbd5e1 !important;
+      }
+      .dark .border {
+          border-color: #475569 !important;
+      }
+      .dark .bg-slate-50, .dark .bg-indigo-50, .dark .bg-amber-50, .dark .bg-fuchsia-50 {
+          background-color: #334155 !important;
+      }
+      .dark .text-sky-600 { color: #60a5fa !important; }
+      .dark .text-sky-700 { color: #93c5fd !important; }
+      .dark .text-gray-700 { color: #cbd5e1 !important; }
+      .dark .text-sm, .dark .text-base, .dark .font-medium, .dark .font-semibold {
+          color: #f1f5f9 !important;
+      }
+      .dark .input-group label {
+          color: #e2e8f0 !important;
+      }
+      .dark .bg-red-100 { background-color: #450a0a !important; }
+      .dark .border-red-600 { border-color: #7f1d1d !important; }
+      .dark .text-red-700 { color: #fecaca !important; }
+
+      .dark .app-logo {
+          filter: drop-shadow(0 0 2px rgba(255,255,255,0.2));
+      }
     </style>
-</head>
-<body class="p-4 md:p-8">
-    
-    <!-- Tombol Mode Gelap -->
-    <button id="darkToggle" class="fixed top-4 right-4 bg-gray-800 text-white px-4 py-2 rounded-xl shadow-lg z-50">🌓 Mode Gelap</button>
+  </head>
+  <body class="p-4 md:p-8">
+    <button
+      id="darkToggle"
+      class="fixed top-4 right-4 bg-gray-800 text-white px-4 py-2 rounded-xl shadow-lg hover:opacity-90 z-50"
+    >
+      🌓 Mode Gelap
+    </button>
 
     <div class="max-w-2xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-2xl">
-        <!-- Header -->
-        <div class="flex items-center gap-4 mb-6 border-b pb-4">
-            <div class="w-14 h-14 md:w-20 md:h-20 bg-sky-100 rounded-full flex items-center justify-center text-3xl">🏥</div>
-            <div>
-                <h1 class="text-2xl md:text-3xl font-extrabold text-gray-800">Laporan Jaga IGD</h1>
-                <p class="text-gray-500 text-sm font-medium">RS Dian Husada</p>
-            </div>
+      <div class="space-y-4 mb-6 border-b pb4">
+        <div class="flex items-center gap-4 mb-2">
+          <img
+            src="LOGO IGD.png"
+            alt="Logo IGD"
+            class="app-logo w-14 h-14 md:w-20 md:h-20 object-contain border-none"
+          />
+          <div>
+            <h1
+              class="text-2xl md:text-3xl font-extrabold text-gray-800 leading-tight"
+            >
+              Laporan Jaga IGD
+            </h1>
+            <p class="text-gray-500 text-sm font-medium">RS Dian Husada</p>
+          </div>
         </div>
-    
-        <div class="bg-gradient-to-r from-indigo-500 to-purple-600 p-4 rounded-xl mb-6 text-center text-white shadow-md">
-            <h2 class="text-xl font-bold">🎉 Selamat Tahun Baru 2026 🎉</h2>
-            <p class="text-xs opacity-80">Versi 2.6.1</p>
-        </div>
-    
-        <!-- Input Data Umum -->
+      </div>
+
+      <div
+        class="bg-gradient-to-r from-indigo-500 to-purple-600 p-4 rounded-xl mb-6 text-center text-white shadow-md"
+      >
+        <h2 class="text-xl font-bold">🎉 Selamat Tahun Baru 2026 🎉</h2>
+        <p class="text-xs opacity-80">Versi 2.6.1</p>
+      </div>
+
+      <div class="max-w-2xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-2xl">
         <div class="space-y-6 mb-8 border-b pb-6">
-            <h2 class="text-xl font-semibold text-sky-600">📅 Data Umum</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <h2 class="text-xl font-semibold text-sky-600">Data Umum</h2>
+          <div class="input-group">
+            <label for="inputDate">Hari & Tanggal</label>
+            <input
+              type="text"
+              id="inputDate"
+              value=""
+              placeholder="Senin, 01 Januari 2025"
+            />
+            <div class="input-group">
+              <label for="inputCity">Kota</label>
+              <input
+                type="text"
+                id="inputCity"
+                value="Mojokerto"
+                readonly
+                class="bg-gray-100 cursor-default"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="shifts-container" class="space-y-6">
+        <div class="shift-block" data-shift="Pagi1">
+          <div
+            class="shift-header cursor-pointer bg-slate-600"
+            id="headerPagi1"
+          >
+            <span role="img" aria-label="emoji" class="mr-3 text-xl">🌌</span>
+            Shift Dini Hari (00.00 - 07.00)
+          </div>
+          <div
+            class="p-4 bg-slate-50 rounded-b-xl space-y-4 hidden"
+            id="contentPagi1"
+          >
+            <div class="space-y-4">
+              <div class="input-group">
+                <label for="drPagi1">Nama Dokter</label>
+                <div class="doctor-inputs">
+                  <select id="drPagi1">
+                    <option value="">-- Pilih Dokter --</option>
+                    <option value="dr. Sukresno Tjahjo W., M.Kes">
+                      dr. Sukresno Tjahjo W., M.Kes
+                    </option>
+                    <option value="dr. Felicia Putri Hartono">
+                      dr. Felicia Putri Hartono
+                    </option>
+                    <option value="dr. Syntia Desy Arisandi">
+                      dr. Syntia Desy Arisandi
+                    </option>
+                    <option value="dr. Imam Fadli">dr. Imam Fadli</option>
+                    <option value="dr. Deo Sanjaya">dr. Deo Sanjaya</option>
+                    <option value="dr. Evva Mardiyana">
+                      dr. Evva Mardiyana
+                    </option>
+                    <option value="dr. Farah Shania">dr. Farah Shania</option>
+                    <option value="dr. Ratna Dewi">dr. Ratna Dewi</option>
+                  </select>
+                  <input
+                    type="text"
+                    id="drExtraPagi1"
+                    value=""
+                    placeholder="(Pengganti)"
+                    title="Nama dokter pengganti/tambahan (misal: Budi) akan ditambahkan dalam kurung()"
+                  />
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
                 <div class="input-group">
-                    <label>Hari & Tanggal</label>
-                    <input type="text" id="inputDate" placeholder="Kamis, 01 Januari 2026">
+                  <label>Jumlah Pasien</label>
+                  <input
+                    type="text"
+                    disabled
+                    id="displayJmlPagi1"
+                    value="0"
+                    class="bg-gray-200"
+                  />
                 </div>
                 <div class="input-group">
-                    <label>Kota</label>
-                    <input type="text" id="inputCity" value="Mojokerto" readonly class="bg-gray-100 cursor-default">
+                  <label>Rawat Inap (MRS)</label>
+                  <input
+                    type="text"
+                    disabled
+                    id="displayMrsPagi1"
+                    value="0"
+                    class="bg-gray-200"
+                  />
                 </div>
+              </div>
             </div>
+            <h3 class="text-base font-semibold pt-2 text-sky-700 border-t pt-3">
+              Rincian Kedatangan Pasien
+            </h3>
+            <div
+              class="grid grid-cols-2 gap-3 p-3 bg-white rounded-lg border border-sky-200"
+            >
+              <div class="col-span-2 text-sm font-medium text-gray-600">
+                Rujukan Puskesmas:
+              </div>
+              <div class="input-group">
+                <label>Rawat Inap (RI)</label
+                ><input type="number" id="pkmRIPagi1" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Rawat Jalan (RJ)</label
+                ><input type="number" id="pkmRJPagi1" value="0" min="0" />
+              </div>
+
+              <div class="col-span-2 text-sm font-medium text-gray-600">
+                Bawa Surat Rujukan:
+              </div>
+              <div class="input-group">
+                <label>Rawat Inap (RI)</label
+                ><input type="number" id="rujukRIPagi1" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Rawat Jalan (RJ)</label
+                ><input type="number" id="rujukRJPagi1" value="0" min="0" />
+              </div>
+
+              <div class="col-span-2 text-sm font-medium text-gray-600">
+                Bawa Hasil Lab:
+              </div>
+              <div class="input-group">
+                <label>Rawat Inap (RI)</label
+                ><input type="number" id="labRIPagi1" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Rawat Jalan (RJ)</label
+                ><input type="number" id="labRJPagi1" value="0" min="0" />
+              </div>
+
+              <div class="col-span-2 text-sm font-medium text-gray-600">
+                Diantar Siaga Desa:
+              </div>
+              <div class="input-group">
+                <label>Rawat Inap (RI)</label
+                ><input type="number" id="desaRIPagi1" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Rawat Jalan (RJ)</label
+                ><input type="number" id="desaRJPagi1" value="0" min="0" />
+              </div>
+
+              <div class="col-span-2 text-sm font-medium text-gray-600">
+                Datang Sendiri:
+              </div>
+              <div class="input-group">
+                <label>Rawat Inap (RI)</label
+                ><input type="number" id="sendiriRIPagi1" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Rawat Jalan (RJ)</label
+                ><input type="number" id="sendiriRJPagi1" value="0" min="0" />
+              </div>
+            </div>
+
+            <h3
+              class="text-base font-semibold pt-2 text-gray-700 border-t pt-3"
+            >
+              Rincian Pembayaran
+            </h3>
+            <div class="input-row">
+              <div class="input-group">
+                <label>BPJS</label
+                ><input type="number" id="bpjsPagi1" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Umum</label
+                ><input type="number" id="umumPagi1" value="0" min="0" />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Rincian Keterangan BPJS</label>
+              <textarea
+                id="bpjsKetPagi1"
+                rows="3"
+                placeholder="Contoh:&#10;1. Tn X abc"
+              ></textarea>
+            </div>
+            <div class="input-group">
+              <label>Rincian Keterangan UMUM</label>
+              <textarea
+                id="umumKetPagi1"
+                rows="3"
+                placeholder="Contoh:&#10;1. Tn X abc"
+              ></textarea>
+            </div>
+
+            <h3
+              class="text-base font-semibold pt-2 text-gray-700 border-t pt-3"
+            >
+              Rincian Status Akhir
+            </h3>
+            <div class="input-group">
+              <label>Rincian Keterangan DOA</label>
+              <textarea
+                id="doaKetPagi1"
+                rows="2"
+                placeholder="Contoh:&#10;1. Tn X DOA"
+              ></textarea>
+            </div>
+            <div class="input-group">
+              <label>Rincian Keterangan Meninggal</label>
+              <textarea
+                id="meninggalKetPagi1"
+                rows="2"
+                placeholder="Contoh:&#10;Tn X meninggal"
+              ></textarea>
+            </div>
+            <div class="input-group">
+              <label>Rincian Keterangan MCU</label>
+              <textarea
+                id="mcuKetPagi1"
+                rows="2"
+                placeholder="Contoh:&#10;1. Tn X MCU surat sehat"
+              ></textarea>
+            </div>
+            <div class="input-group">
+              <label>Rujukan dari Puskesmas</label>
+              <textarea
+                id="pkmRujukKetPagi1"
+                rows="2"
+                placeholder="Contoh:&#10;1. An Y rujukan PKM Dsn A"
+              ></textarea>
+            </div>
+            <div class="input-group">
+              <label>Rujuk ke Rumah Sakit Lain</label>
+              <textarea
+                id="rsLainKetPagi1"
+                rows="2"
+                placeholder="Contoh:&#10;1. Ny Z rujukan ke RS A"
+              ></textarea>
+            </div>
+          </div>
         </div>
-        
-        <!-- Shifts -->
-        <div id="shifts-container" class="space-y-4">
-            <!-- Pagi 1 -->
-            <div class="shift-block" data-shift="Pagi1">
-                <div class="shift-header cursor-pointer bg-slate-700" id="headerPagi1">🌌 Dini Hari (00.00 - 07.00)</div>
-                <div class="p-4 bg-slate-50 rounded-b-xl space-y-4 hidden dark:bg-slate-800/50" id="contentPagi1"></div>
+
+        <div class="shift-block" data-shift="Pagi2">
+          <div
+            class="shift-header bg-indigo-400 cursor-pointer"
+            id="headerPagi2"
+          >
+            <span role="img" aria-label="emoji" class="mr-3 text-xl">🌄</span>
+            Shift Pagi (07.00 - 14.00)
+          </div>
+          <div
+            class="p-4 bg-indigo-50 rounded-b-xl space-y-4 hidden"
+            id="contentPagi2"
+          >
+            <div class="space-y-4">
+              <div class="input-group">
+                <label for="drPagi2">Nama Dokter</label>
+                <div class="doctor-inputs">
+                  <select id="drPagi2">
+                    <option value="">-- Pilih Dokter --</option>
+                    <option value="dr. Sukresno Tjahjo W., M.Kes">
+                      dr. Sukresno Tjahjo W., M.Kes
+                    </option>
+                    <option value="dr. Felicia Putri Hartono">
+                      dr. Felicia Putri Hartono
+                    </option>
+                    <option value="dr. Syntia Desy Arisandi">
+                      dr. Syntia Desy Arisandi
+                    </option>
+                    <option value="dr. Imam Fadli">dr. Imam Fadli</option>
+                    <option value="dr. Deo Sanjaya">dr. Deo Sanjaya</option>
+                    <option value="dr. Evva Mardiyana">
+                      dr. Evva Mardiyana
+                    </option>
+                    <option value="dr. Farah Shania">dr. Farah Shania</option>
+                    <option value="dr. Ratna Dewi">dr. Ratna Dewi</option>
+                  </select>
+                  <input
+                    type="text"
+                    id="drExtraPagi2"
+                    value=""
+                    placeholder="(Pengganti)"
+                    title="Nama dokter pengganti/tambahan (misal: Budi) akan ditambahkan dalam kurung()"
+                  />
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="input-group">
+                  <label>Jumlah Pasien</label>
+                  <input
+                    type="text"
+                    disabled
+                    id="displayJmlPagi2"
+                    value="0"
+                    class="bg-gray-200"
+                  />
+                </div>
+                <div class="input-group">
+                  <label>Rawat Inap (MRS)</label>
+                  <input
+                    type="text"
+                    disabled
+                    id="displayMrsPagi2"
+                    value="0"
+                    class="bg-gray-200"
+                  />
+                </div>
+              </div>
             </div>
-            <!-- Pagi 2 -->
-            <div class="shift-block" data-shift="Pagi2">
-                <div class="shift-header bg-amber-500 cursor-pointer" id="headerPagi2">🌄 Pagi (07.00 - 14.00)</div>
-                <div class="p-4 bg-amber-50 rounded-b-xl space-y-4 hidden dark:bg-amber-900/10" id="contentPagi2"></div>
+            <h3 class="text-base font-semibold pt-2 text-sky-700 border-t pt-3">
+              Rincian Kedatangan Pasien
+            </h3>
+            <div
+              class="grid grid-cols-2 gap-3 p-3 bg-white rounded-lg border border-sky-200"
+            >
+              <div class="col-span-2 text-sm font-medium text-gray-600">
+                Rujukan Puskesmas:
+              </div>
+              <div class="input-group">
+                <label>Rawat Inap (RI)</label
+                ><input type="number" id="pkmRIPagi2" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Rawat Jalan (RJ)</label
+                ><input type="number" id="pkmRJPagi2" value="0" min="0" />
+              </div>
+
+              <div class="col-span-2 text-sm font-medium text-gray-600">
+                Bawa Surat Rujukan:
+              </div>
+              <div class="input-group">
+                <label>Rawat Inap (RI)</label
+                ><input type="number" id="rujukRIPagi2" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Rawat Jalan (RJ)</label
+                ><input type="number" id="rujukRJPagi2" value="0" min="0" />
+              </div>
+
+              <div class="col-span-2 text-sm font-medium text-gray-600">
+                Bawa Hasil Lab:
+              </div>
+              <div class="input-group">
+                <label>Rawat Inap (RI)</label
+                ><input type="number" id="labRIPagi2" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Rawat Jalan (RJ)</label
+                ><input type="number" id="labRJPagi2" value="0" min="0" />
+              </div>
+
+              <div class="col-span-2 text-sm font-medium text-gray-600">
+                Diantar Siaga Desa:
+              </div>
+              <div class="input-group">
+                <label>Rawat Inap (RI)</label
+                ><input type="number" id="desaRIPagi2" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Rawat Jalan (RJ)</label
+                ><input type="number" id="desaRJPagi2" value="0" min="0" />
+              </div>
+
+              <div class="col-span-2 text-sm font-medium text-gray-600">
+                Datang Sendiri:
+              </div>
+              <div class="input-group">
+                <label>Rawat Inap (RI)</label
+                ><input type="number" id="sendiriRIPagi2" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Rawat Jalan (RJ)</label
+                ><input type="number" id="sendiriRJPagi2" value="0" min="0" />
+              </div>
             </div>
-            <!-- Siang -->
-            <div class="shift-block" data-shift="Siang">
-                <div class="shift-header bg-orange-500 cursor-pointer" id="headerSiang">🏜️ Siang (14.00 - 21.00)</div>
-                <div class="p-4 bg-orange-50 rounded-b-xl space-y-4 hidden dark:bg-orange-900/10" id="contentSiang"></div>
+
+            <h3
+              class="text-base font-semibold pt-2 text-gray-700 border-t pt-3"
+            >
+              Rincian Pembayaran
+            </h3>
+            <div class="input-row">
+              <div class="input-group">
+                <label>BPJS</label
+                ><input type="number" id="bpjsPagi2" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Umum</label
+                ><input type="number" id="umumPagi2" value="0" min="0" />
+              </div>
             </div>
-            <!-- Malam -->
-            <div class="shift-block" data-shift="Malam">
-                <div class="shift-header bg-indigo-600 cursor-pointer" id="headerMalam">🌠 Malam (21.00 - 00.00)</div>
-                <div class="p-4 bg-indigo-50 rounded-b-xl space-y-4 hidden dark:bg-indigo-900/10" id="contentMalam"></div>
+
+            <div class="input-group">
+              <label>Rincian Keterangan BPJS</label>
+              <textarea
+                id="bpjsKetPagi2"
+                rows="3"
+                placeholder="Contoh:&#10;1. Tn X abc"
+              ></textarea>
             </div>
+            <div class="input-group">
+              <label>Rincian Keterangan UMUM</label>
+              <textarea
+                id="umumKetPagi2"
+                rows="3"
+                placeholder="Contoh:&#10;1. Tn X abc"
+              ></textarea>
+            </div>
+
+            <h3
+              class="text-base font-semibold pt-2 text-gray-700 border-t pt-3"
+            >
+              Rincian Status Akhir
+            </h3>
+            <div class="input-group">
+              <label>Rincian Keterangan DOA</label>
+              <textarea
+                id="doaKetPagi2"
+                rows="2"
+                placeholder="Contoh:&#10;1. Tn X DOA"
+              ></textarea>
+            </div>
+            <div class="input-group">
+              <label>Rincian Keterangan Meninggal</label>
+              <textarea
+                id="meninggalKetPagi2"
+                rows="2"
+                placeholder="Contoh:&#10;1. Tn X meninggal"
+              ></textarea>
+            </div>
+            <div class="input-group">
+              <label>Rincian Keterangan MCU</label>
+              <textarea
+                id="mcuKetPagi2"
+                rows="2"
+                placeholder="Contoh:&#10;1. Tn X MCU surat sehat"
+              ></textarea>
+            </div>
+            <div class="input-group">
+              <label>Rujukan dari Puskesmas</label>
+              <textarea
+                id="pkmRujukKetPagi2"
+                rows="2"
+                placeholder="Contoh:&#10;1. An Y rujukan PKM Dsn A"
+              ></textarea>
+            </div>
+            <div class="input-group">
+              <label>Rujuk ke Rumah Sakit Lain</label>
+              <textarea
+                id="rsLainKetPagi2"
+                rows="2"
+                placeholder="Contoh:&#10;1. Ny Z rujukan ke RS A"
+              ></textarea>
+            </div>
+          </div>
         </div>
-        
-        <!-- Output -->
-        <div class="mt-8">
-            <h2 class="text-xl font-semibold text-gray-800 mb-2">📝 Laporan Siap Salin</h2>
-            <textarea id="outputReport" class="w-full h-64 bg-gray-100 p-4 border rounded-xl font-mono text-xs md:text-sm" readonly></textarea>
-            
-            <div id="doctorWarning" class="mt-3 p-3 bg-red-100 border border-red-400 text-red-700 rounded-xl font-medium hidden">
-                ⚠️ Nama dokter belum diisi: <span id="missingList"></span>
+
+        <div class="shift-block" data-shift="Siang">
+          <div
+            class="shift-header bg-amber-500 cursor-pointer"
+            id="headerSiang"
+          >
+            <span role="img" aria-label="emoji" class="mr-3 text-xl">🏜️</span>
+            Shift Siang (14.00 - 21.00)
+          </div>
+          <div
+            class="p-4 bg-amber-50 rounded-b-xl space-y-4 hidden"
+            id="contentSiang"
+          >
+            <div class="space-y-4">
+              <div class="input-group">
+                <label for="drSiang">Nama Dokter</label>
+                <div class="doctor-inputs">
+                  <select id="drSiang">
+                    <option value="">-- Pilih Dokter --</option>
+                    <option value="dr. Sukresno Tjahjo W., M.Kes">
+                      dr. Sukresno Tjahjo W., M.Kes
+                    </option>
+                    <option value="dr. Felicia Putri Hartono">
+                      dr. Felicia Putri Hartono
+                    </option>
+                    <option value="dr. Syntia Desy Arisandi">
+                      dr. Syntia Desy Arisandi
+                    </option>
+                    <option value="dr. Imam Fadli">dr. Imam Fadli</option>
+                    <option value="dr. Deo Sanjaya">dr. Deo Sanjaya</option>
+                    <option value="dr. Evva Mardiyana">
+                      dr. Evva Mardiyana
+                    </option>
+                    <option value="dr. Farah Shania">dr. Farah Shania</option>
+                    <option value="dr. Ratna Dewi">dr. Ratna Dewi</option>
+                  </select>
+                  <input
+                    type="text"
+                    id="drExtraSiang"
+                    value=""
+                    placeholder="(Pengganti)"
+                    title="Nama dokter pengganti/tambahan (misal: Budi) akan ditambahkan dalam kurung()"
+                  />
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="input-group">
+                  <label>Jumlah Pasien</label>
+                  <input
+                    type="text"
+                    disabled
+                    id="displayJmlSiang"
+                    value="0"
+                    class="bg-gray-200"
+                  />
+                </div>
+                <div class="input-group">
+                  <label>Rawat Inap (MRS)</label>
+                  <input
+                    type="text"
+                    disabled
+                    id="displayMrsSiang"
+                    value="0"
+                    class="bg-gray-200"
+                  />
+                </div>
+              </div>
             </div>
-            
-            <button id="copyBtn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-4 rounded-xl mt-3 transition shadow-lg disabled:opacity-50">📋 Salin Laporan</button>
-            <button id="resetBtn" class="w-full bg-red-100 text-red-600 font-bold py-3 px-4 rounded-xl mt-8">🗑️ Reset Data</button>
+            <h3 class="text-base font-semibold pt-2 text-sky-700 border-t pt-3">
+              Rincian Kedatangan Pasien
+            </h3>
+            <div
+              class="grid grid-cols-2 gap-3 p-3 bg-white rounded-lg border border-sky-200"
+            >
+              <div class="col-span-2 text-sm font-medium text-gray-600">
+                Rujukan Puskesmas:
+              </div>
+              <div class="input-group">
+                <label>Rawat Inap (RI)</label
+                ><input type="number" id="pkmRISiang" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Rawat Jalan (RJ)</label
+                ><input type="number" id="pkmRJSiang" value="0" min="0" />
+              </div>
+
+              <div class="col-span-2 text-sm font-medium text-gray-600">
+                Bawa Surat Rujukan:
+              </div>
+              <div class="input-group">
+                <label>Rawat Inap (RI)</label
+                ><input type="number" id="rujukRISiang" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Rawat Jalan (RJ)</label
+                ><input type="number" id="rujukRJSiang" value="0" min="0" />
+              </div>
+
+              <div class="col-span-2 text-sm font-medium text-gray-600">
+                Bawa Hasil Lab:
+              </div>
+              <div class="input-group">
+                <label>Rawat Inap (RI)</label
+                ><input type="number" id="labRISiang" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Rawat Jalan (RJ)</label
+                ><input type="number" id="labRJSiang" value="0" min="0" />
+              </div>
+
+              <div class="col-span-2 text-sm font-medium text-gray-600">
+                Diantar Siaga Desa:
+              </div>
+              <div class="input-group">
+                <label>Rawat Inap (RI)</label
+                ><input type="number" id="desaRISiang" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Rawat Jalan (RJ)</label
+                ><input type="number" id="desaRJSiang" value="0" min="0" />
+              </div>
+
+              <div class="col-span-2 text-sm font-medium text-gray-600">
+                Datang Sendiri:
+              </div>
+              <div class="input-group">
+                <label>Rawat Inap (RI)</label
+                ><input type="number" id="sendiriRISiang" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Rawat Jalan (RJ)</label
+                ><input type="number" id="sendiriRJSiang" value="0" min="0" />
+              </div>
+            </div>
+
+            <h3
+              class="text-base font-semibold pt-2 text-gray-700 border-t pt-3"
+            >
+              Rincian Pembayaran
+            </h3>
+            <div class="input-row">
+              <div class="input-group">
+                <label>BPJS</label
+                ><input type="number" id="bpjsSiang" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Umum</label
+                ><input type="number" id="umumSiang" value="0" min="0" />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Rincian Keterangan BPJS</label>
+              <textarea
+                id="bpjsKetSiang"
+                rows="3"
+                placeholder="Contoh:&#10;1. Tn X abc"
+              ></textarea>
+            </div>
+            <div class="input-group">
+              <label>Rincian Keterangan UMUM</label>
+              <textarea
+                id="umumKetSiang"
+                rows="3"
+                placeholder="Contoh:&#10;1. Tn X abc"
+              ></textarea>
+            </div>
+
+            <h3
+              class="text-base font-semibold pt-2 text-gray-700 border-t pt-3"
+            >
+              Rincian Status Akhir
+            </h3>
+            <div class="input-group">
+              <label>Rincian Keterangan DOA</label>
+              <textarea
+                id="doaKetSiang"
+                rows="2"
+                placeholder="Contoh:&#10;1. Tn X DOA"
+              ></textarea>
+            </div>
+            <div class="input-group">
+              <label>Rincian Keterangan Meninggal</label>
+              <textarea
+                id="meninggalKetSiang"
+                rows="2"
+                placeholder="Contoh:&#10;1. Tn X meninggal"
+              ></textarea>
+            </div>
+            <div class="input-group">
+              <label>Rincian Keterangan MCU</label>
+              <textarea
+                id="mcuKetSiang"
+                rows="2"
+                placeholder="Contoh:&#10;1. Tn X MCU surat sehat"
+              ></textarea>
+            </div>
+            <div class="input-group">
+              <label>Rujukan dari Puskesmas</label>
+              <textarea
+                id="pkmRujukKetSiang"
+                rows="2"
+                placeholder="Contoh:&#10;1. An Y rujukan PKM Dsn A"
+              ></textarea>
+            </div>
+            <div class="input-group">
+              <label>Rujuk ke Rumah Sakit Lain</label>
+              <textarea
+                id="rsLainKetSiang"
+                rows="2"
+                placeholder="Contoh:&#10;1. Ny Z rujukan ke RS A"
+              ></textarea>
+            </div>
+          </div>
         </div>
+
+        <div class="shift-block" data-shift="Malam">
+          <div
+            class="shift-header bg-fuchsia-400 cursor-pointer"
+            id="headerMalam"
+          >
+            <span role="img" aria-label="emoji" class="mr-3 text-xl">🌠</span>
+            Shift Malam (21.00 - 00.00)
+          </div>
+          <div
+            class="p-4 bg-fuchsia-50 rounded-b-xl space-y-4 hidden"
+            id="contentMalam"
+          >
+            <div class="space-y-4">
+              <div class="input-group">
+                <label for="drMalam">Nama Dokter</label>
+                <div class="doctor-inputs">
+                  <select id="drMalam">
+                    <option value="">-- Pilih Dokter --</option>
+                    <option value="dr. Sukresno Tjahjo W., M.Kes">
+                      dr. Sukresno Tjahjo W., M.Kes
+                    </option>
+                    <option value="dr. Felicia Putri Hartono">
+                      dr. Felicia Putri Hartono
+                    </option>
+                    <option value="dr. Syntia Desy Arisandi">
+                      dr. Syntia Desy Arisandi
+                    </option>
+                    <option value="dr. Imam Fadli">dr. Imam Fadli</option>
+                    <option value="dr. Deo Sanjaya">dr. Deo Sanjaya</option>
+                    <option value="dr. Evva Mardiyana">
+                      dr. Evva Mardiyana
+                    </option>
+                    <option value="dr. Farah Shania">dr. Farah Shania</option>
+                    <option value="dr. Ratna Dewi">dr. Ratna Dewi</option>
+                  </select>
+                  <input
+                    type="text"
+                    id="drExtraMalam"
+                    value=""
+                    placeholder="(Pengganti)"
+                    title="Nama dokter pengganti/tambahan (misal: Budi) akan ditambahkan dalam kurung()"
+                  />
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="input-group">
+                  <label>Jumlah Pasien</label>
+                  <input
+                    type="text"
+                    disabled
+                    id="displayJmlMalam"
+                    value="0"
+                    class="bg-gray-200"
+                  />
+                </div>
+                <div class="input-group">
+                  <label>Rawat Inap (MRS)</label>
+                  <input
+                    type="text"
+                    disabled
+                    id="displayMrsMalam"
+                    value="0"
+                    class="bg-gray-200"
+                  />
+                </div>
+              </div>
+            </div>
+            <h3 class="text-base font-semibold pt-2 text-sky-700 border-t pt-3">
+              Rincian Kedatangan Pasien
+            </h3>
+            <div
+              class="grid grid-cols-2 gap-3 p-3 bg-white rounded-lg border border-sky-200"
+            >
+              <div class="col-span-2 text-sm font-medium text-gray-600">
+                Rujukan Puskesmas:
+              </div>
+              <div class="input-group">
+                <label>Rawat Inap (RI)</label
+                ><input type="number" id="pkmRIMalam" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Rawat Jalan (RJ)</label
+                ><input type="number" id="pkmRJMalam" value="0" min="0" />
+              </div>
+
+              <div class="col-span-2 text-sm font-medium text-gray-600">
+                Bawa Surat Rujukan:
+              </div>
+              <div class="input-group">
+                <label>Rawat Inap (RI)</label
+                ><input type="number" id="rujukRIMalam" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Rawat Jalan (RJ)</label
+                ><input type="number" id="rujukRJMalam" value="0" min="0" />
+              </div>
+
+              <div class="col-span-2 text-sm font-medium text-gray-600">
+                Bawa Hasil Lab:
+              </div>
+              <div class="input-group">
+                <label>Rawat Inap (RI)</label
+                ><input type="number" id="labRIMalam" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Rawat Jalan (RJ)</label
+                ><input type="number" id="labRJMalam" value="0" min="0" />
+              </div>
+
+              <div class="col-span-2 text-sm font-medium text-gray-600">
+                Diantar Siaga Desa:
+              </div>
+              <div class="input-group">
+                <label>Rawat Inap (RI)</label
+                ><input type="number" id="desaRIMalam" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Rawat Jalan (RJ)</label
+                ><input type="number" id="desaRJMalam" value="0" min="0" />
+              </div>
+
+              <div class="col-span-2 text-sm font-medium text-gray-600">
+                Datang Sendiri:
+              </div>
+              <div class="input-group">
+                <label>Rawat Inap (RI)</label
+                ><input type="number" id="sendiriRIMalam" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Rawat Jalan (RJ)</label
+                ><input type="number" id="sendiriRJMalam" value="0" min="0" />
+              </div>
+            </div>
+
+            <h3
+              class="text-base font-semibold pt-2 text-gray-700 border-t pt-3"
+            >
+              Rincian Pembayaran
+            </h3>
+            <div class="input-row">
+              <div class="input-group">
+                <label>BPJS</label
+                ><input type="number" id="bpjsMalam" value="0" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Umum</label
+                ><input type="number" id="umumMalam" value="0" min="0" />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Rincian Keterangan BPJS</label>
+              <textarea
+                id="bpjsKetMalam"
+                rows="3"
+                placeholder="Contoh:&#10;1. Tn X abc"
+              ></textarea>
+            </div>
+            <div class="input-group">
+              <label>Rincian Keterangan UMUM</label>
+              <textarea
+                id="umumKetMalam"
+                rows="3"
+                placeholder="Contoh:&#10;1. Tn X abc"
+              ></textarea>
+            </div>
+
+            <h3
+              class="text-base font-semibold pt-2 text-gray-700 border-t pt-3"
+            >
+              Rincian Status Akhir
+            </h3>
+            <div class="input-group">
+              <label>Rincian Keterangan DOA</label>
+              <textarea
+                id="doaKetMalam"
+                rows="2"
+                placeholder="Contoh:&#10;1. Tn X DOA"
+              ></textarea>
+            </div>
+            <div class="input-group">
+              <label>Rincian Keterangan Meninggal</label>
+              <textarea
+                id="meninggalKetMalam"
+                rows="2"
+                placeholder="Contoh:&#10;1. Tn X meninggal"
+              ></textarea>
+            </div>
+            <div class="input-group">
+              <label>Rincian Keterangan MCU</label>
+              <textarea
+                id="mcuKetMalam"
+                rows="2"
+                placeholder="Contoh:&#10;1. Tn X MCU surat sehat"
+              ></textarea>
+            </div>
+            <div class="input-group">
+              <label>Rujukan dari Puskesmas</label>
+              <textarea
+                id="pkmRujukKetMalam"
+                rows="2"
+                placeholder="Contoh:&#10;1. An Y rujukan PKM Dsn A"
+              ></textarea>
+            </div>
+            <div class="input-group">
+              <label>Rujuk ke Rumah Sakit Lain</label>
+              <textarea
+                id="rsLainKetMalam"
+                rows="2"
+                placeholder="Contoh:&#10;1. Ny Z rujukan ke RS A"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8">
+        <h2 class="text-xl font-semibold text-gray-800 mb-2">
+          Hasil Laporan Siap Salin
+        </h2>
+        <textarea
+          id="outputReport"
+          class="w-full h-64 bg-gray-100 text-gray-800 p-4 border border-gray-300 rounded-xl font-mono text-sm resize-none"
+          readonly
+          placeholder="Laporan yang sudah terformat akan muncul di sini dan diperbarui secara otomatis saat Anda memasukkan data."
+          style="white-space: pre;"
+        ></textarea>
+
+        <div
+          id="doctorWarningMessage"
+          class="mt-3 p-3 bg-red-100 border border-red-400 text-red-700 rounded-xl font-medium hidden"
+        >
+          ⚠️⚠️Peringatan!⚠️⚠️ Anda belum memasukkan nama dokter untuk shift
+          berikut: <span id="missingDoctorsList"></span>
+        </div>
+
+        <button
+          id="copyBtn"
+          class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl mt-3 transition duration-150 shadow-lg hover:shadow-xl"
+          disabled
+        >
+          <span role="img" aria-label="emoji" class="mr-1">📋</span> Salin
+          Laporan ke Clipboard
+        </button>
+
+        <button
+          id="resetBtn"
+          class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-xl mt-8 transition duration-150 shadow-md hover:shadow-lg"
+        >
+          <span role="img" aria-label="emoji" class="mr-1">🗑️</span> Hapus Semua
+          Data
+        </button>
+        <div
+          id="copyMessage"
+          class="mt-2 text-sm text-center font-medium hidden"
+        >
+          Berhasil disalin!
+        </div>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-800 mb-3 text-center">
+          Tautan Cepat
+        </h3>
+        <div class="flex flex-col md:flex-row gap-3">
+          <button
+            id="navBtn1"
+            class="flex-1 bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-4 rounded-xl transition duration-150 shadow-md"
+          >
+            <span role="img" aria-label="emoji" class="mr-1">💻</span> Laporan
+            Bulanan
+          </button>
+          <button
+            id="navBtn2"
+            class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition duration-150 shadow-md"
+          >
+            <span role="img" aria-label="emoji" class="mr-1">📑</span>
+            Kalkulator Medis
+          </button>
+          <button
+            id="navBtn3"
+            class="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-xl transition duration-150 shadow-md"
+          >
+            <span role="img" aria-label="emoji" class="mr-1">🔗</span> Dokumen
+            Penting IGD (Gdrive)
+          </button>
+        </div>
+      </div>
+      <div class="mt-8 border-t pt-6">
+        <div
+          id="changelogHeader"
+          class="flex justify-between items-center cursor-pointer mb-2"
+        >
+          <h2 class="text-xl font-semibold text-gray-800">
+            Changelog Aplikasi
+          </h2>
+          <svg
+            id="changelogIcon"
+            class="w-5 h-5 text-gray-500 transform transition-transform duration-300"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            ></path>
+          </svg>
+        </div>
+
+        <div id="changelogContent" class="hidden">
+          <ul class="list-disc list-inside text-gray-600 space-y-2 pl-4">
+            <li class="font-semibold">Update Terbaru</li>
+            <ul class="list-circle list-inside ml-4 text-sm space-y-1">
+              <li>
+                [31 Des 2025] **Penambahan fitur auto update jika tersedia
+                pembaruan.
+              </li>
+              <li>[31 Des 2025] **Selamat Tahun Baru 2026</li>
+            </ul>
+            <li class="font-semibold">Update Sebelumnya</li>
+            <ul class="list-circle list-inside ml-4 text-sm space-y-1">
+              <li>
+                [30 Des 2025] **Perbaikan kalimat pada hasil laporan siap salin.
+              </li>
+            </ul>
+            <li class="font-semibold">Update Sebelumnya</li>
+            <ul class="list-circle list-inside ml-4 text-sm space-y-1">
+              <li>
+                [26 Des 2025] **Perbaikan typo dan perubahan nama beberapa
+                tombol.
+              </li>
+              <li>
+                [26 Des 2025] **Perubahan tampilan dan logo baru disamping
+                judul.
+              </li>
+            </ul>
+            <li class="font-semibold">Update Sebelumnya</li>
+            <ul class="list-circle list-inside ml-4 text-sm space-y-1">
+              <li>
+                [10 Des 2025] **Penambahan kolom Rawat Inap (MRS) di samping
+                Jumlah Pasien pada input tiap shift.
+              </li>
+              <li>
+                [10 Des 2025] **Menambahkan fitur notifikasi peringatan jika
+                user belum mengisi nama dokter tiap shift.
+              </li>
+              <li>
+                [10 Des 2025] **Tombol salin tidak akan berfungsi jika nama
+                dokter belum diisi.
+              </li>
+            </ul>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <script>
-        // Konfigurasi GitHub untuk Update Otomatis
-        const REPO_OWNER = "igdrsdh"; 
-        const REPO_NAME = "laporan-trial";
-        const BRANCH = "main";
-        const CHECK_INTERVAL = 300000; // Cek setiap 5 menit
+      /* ========================================================
+         LOGIKA PEMBARUAN OTOMATIS GITHUB
+         ======================================================== */
+      const GITHUB_CONFIG = {
+          repo: "igdrsdh/Aplikasi-Laporan-Harian", // GANTI INI DENGAN REPO ANDA
+          branch: "main",
+          checkInterval: 300000 // 5 Menit
+      };
 
-        async function checkForUpdates() {
-            try {
-                const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits/${BRANCH}`);
-                if (!response.ok) return;
-                
-                const data = await response.json();
-                const latestSha = data.sha;
-                const localSha = localStorage.getItem('github_commit_sha');
+      async function checkGitHubUpdate() {
+          try {
+              const response = await fetch(`https://api.github.com/repos/${GITHUB_CONFIG.repo}/commits/${GITHUB_CONFIG.branch}`);
+              if (!response.ok) return;
 
-                if (localSha && localSha !== latestSha) {
-                    if (confirm("Pembaruan aplikasi versi terbaru ditemukan di GitHub!\n\nIngin memuat ulang sekarang? (Data input Anda akan tetap aman di memori lokal)")) {
-                        localStorage.setItem('github_commit_sha', latestSha);
-                        location.reload(true);
-                    }
-                } else {
-                    localStorage.setItem('github_commit_sha', latestSha);
-                }
-            } catch (err) {
-                console.error("Gagal memeriksa update:", err);
-            }
-        }
+              const data = await response.json();
+              const latestSha = data.sha;
+              const localSha = localStorage.getItem('last_github_commit');
 
-        const doctors = ["dr. Sukresno Tjahjo W., M.Kes", "dr. Felicia Putri Hartono", "dr. Syntia Desy Arisandi", "dr. Imam Fadli", "dr. Deo Sanjaya", "dr. Evva Mardiyana", "dr. Farah Shania", "dr. Ratna Dewi"];
-        const shifts = ['Pagi1', 'Pagi2', 'Siang', 'Malam'];
+              if (localSha && localSha !== latestSha) {
+                  localStorage.setItem('last_github_commit', latestSha);
+                  const confirmUpdate = window.confirm(
+                      "Pembaruan aplikasi versi terbaru tersedia.\n\n" +
+                      "Sistem akan memuat ulang halaman. Data input Anda tetap aman.\n\n" +
+                      "Klik OK untuk memperbarui."
+                  );
+                  if (confirmUpdate) {
+                      window.location.reload(true);
+                  }
+              } else {
+                  localStorage.setItem('last_github_commit', latestSha);
+              }
+          } catch (error) {
+              console.error("Gagal memeriksa update GitHub:", error);
+          }
+      }
+      /* ======================================================== */
 
-        function buildUI() {
-            shifts.forEach(s => {
-                const container = document.getElementById(`content${s}`);
-                container.innerHTML = `
-                    <div class="input-group"><label>Nama Dokter</label>
-                        <div class="doctor-inputs">
-                            <select id="dr${s}"><option value="">-- Pilih --</option>${doctors.map(d => `<option value="${d}">${d}</option>`).join('')}</select>
-                            <input type="text" id="drEx${s}" placeholder="(Pengganti)">
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div class="input-group"><label>Pasien (Tot)</label><input type="text" id="tot${s}" disabled class="bg-gray-100"></div>
-                        <div class="input-group"><label>MRS</label><input type="text" id="mrs${s}" disabled class="bg-gray-100"></div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 p-3 bg-white rounded-lg border text-xs dark:bg-slate-700">
-                        <div class="col-span-2 font-bold opacity-50 uppercase">Puskesmas</div>
-                        <input type="number" id="pkmRI${s}" value="0" placeholder="RI"> <input type="number" id="pkmRJ${s}" value="0" placeholder="RJ">
-                        <div class="col-span-2 font-bold opacity-50 uppercase">Rujukan</div>
-                        <input type="number" id="rujRI${s}" value="0"> <input type="number" id="rujRJ${s}" value="0">
-                        <div class="col-span-2 font-bold opacity-50 uppercase">Lab</div>
-                        <input type="number" id="labRI${s}" value="0"> <input type="number" id="labRJ${s}" value="0">
-                        <div class="col-span-2 font-bold opacity-50 uppercase">Siaga Desa</div>
-                        <input type="number" id="dsRI${s}" value="0"> <input type="number" id="dsRJ${s}" value="0">
-                        <div class="col-span-2 font-bold opacity-50 uppercase">Sendiri</div>
-                        <input type="number" id="sdRI${s}" value="0"> <input type="number" id="sdRJ${s}" value="0">
-                    </div>
-                    <div class="grid grid-cols-2 gap-2"><input type="number" id="bpjs${s}" placeholder="BPJS"> <input type="number" id="umum${s}" placeholder="Umum"></div>
-                    <textarea id="bpjsK${s}" placeholder="Ket BPJS" rows="2"></textarea>
-                    <textarea id="umumK${s}" placeholder="Ket Umum" rows="2"></textarea>
-                    <textarea id="doa${s}" placeholder="Ket DOA" rows="1"></textarea>
-                    <textarea id="die${s}" placeholder="Ket Meninggal" rows="1"></textarea>
-                `;
-            });
-        }
+      // Simpan daftar semua nama shift dan ID konten untuk implementasi akordeon
+      const allShiftNames = ['Pagi1', 'Pagi2', 'Siang', 'Malam'];
+      const allContentIds = allShiftNames.map(name => `content${name}`);
 
-        function generate() {
-            let totalA = 0, totalM = 0;
-            let summary = "";
-            let details = "";
-            let missing = [];
+      // Fungsi utilitas untuk mengambil nilai input, mengembalikan 0 jika kosong atau bukan angka
+      function getNum(id) {
+          const val = document.getElementById(id).value;
+          return Number(val) || 0;
+      }
 
-            shifts.forEach(s => {
-                const dr = document.getElementById(`dr${s}`).value;
-                const drEx = document.getElementById(`drEx${s}`).value;
-                const fDr = dr ? (drEx ? `${dr} (${drEx})` : dr) : drEx;
-                if (!fDr) missing.push(s);
+      // Fungsi utilitas untuk mengambil nilai teks, mengembalikan string kosong jika kosong
+      function getStr(id) {
+          const element = document.getElementById(id);
+          return element ? element.value.trim() : '';
+      }
 
-                const get = (id) => Number(document.getElementById(id + s).value) || 0;
-                const getS = (id) => document.getElementById(id + s).value || "-";
+      // --- FUNGSI: MENGAMBIL DAN MENGGABUNGKAN NAMA DOKTER (SELECT + INPUT TEKS) ---
+      function getDoctorName(shift) {
+          const drElement = document.getElementById(`dr${shift}`);
+          const drExtraElement = document.getElementById(`drExtra${shift}`);
 
-                const mrs = get('pkmRI') + get('rujRI') + get('labRI') + get('dsRI') + get('sdRI');
-                const rj = get('pkmRJ') + get('rujRJ') + get('labRJ') + get('dsRJ') + get('sdRJ');
-                const tot = mrs + rj;
-                
-                document.getElementById('tot'+s).value = tot;
-                document.getElementById('mrs'+s).value = mrs;
+          let drName = drElement ? drElement.value.trim() : '';
+          const drExtra = drExtraElement ? drExtraElement.value.trim() : '';
 
-                totalA += tot; totalM += mrs;
-                const lbl = s.includes('Pagi1') ? 'DINI HARI' : s.includes('Pagi2') ? 'PAGI' : s.includes('Siang') ? 'SIANG' : 'MALAM';
-                summary += `${lbl} : ${tot} px, MRS: ${mrs}\n`;
+          if (drName) {
+              if (drExtra) {
+                  return `${drName} (${drExtra})`;
+              }
+              return drName;
+          } else if (drExtra) {
+              return drExtra;
+          }
+          return '';
+      }
 
-                details += `SHIFT ${lbl}\nDokter: ${fDr || '-'}\nTotal: ${tot} | MRS: ${mrs}\nBPJS: ${get('bpjs')} | Umum: ${get('umum')}\nRJ: ${rj}\n\n`;
-            });
+      // --- FUNGSI BARU: VALIDASI APAKAH DOKTER SUDAH DIISI ---
+      function isDoctorFilled(shift) {
+          const drElement = document.getElementById(`dr${shift}`);
+          const drExtraElement = document.getElementById(`drExtra${shift}`);
 
-            document.getElementById('outputReport').value = `LAPORAN IGD ${getVal('inputCity')}\n${getVal('inputDate')}\n\nTOTAL: ${totalA} PX (MRS: ${totalM})\n${summary}\n\n${details}`;
-            
-            document.getElementById('doctorWarning').classList.toggle('hidden', missing.length === 0);
-            document.getElementById('missingList').textContent = missing.join(', ');
-            document.getElementById('copyBtn').disabled = missing.length > 0;
-            save();
-        }
+          const drName = drElement ? drElement.value.trim() : '';
+          const drExtra = drExtraElement ? drExtraElement.value.trim() : '';
 
-        function save() {
-            const data = {};
-            document.querySelectorAll('input, select, textarea').forEach(el => { if(el.id && !el.disabled) data[el.id] = el.value; });
-            localStorage.setItem('igd_data', JSON.stringify(data));
-        }
+          return drName !== '' || drExtra !== '';
+      }
 
-        function load() {
-            const saved = localStorage.getItem('igd_data');
-            if (saved) {
-                const data = JSON.parse(saved);
-                Object.keys(data).forEach(id => { if(document.getElementById(id)) document.getElementById(id).value = data[id]; });
-            }
-        }
+      // Fungsi untuk memastikan teks rincian STATUS AKHIR memiliki format yang tepat
+      function formatRincianStatusAkhir(text) {
+          return text ? `\n${text}` : '';
+      }
 
-        const getVal = (id) => document.getElementById(id).value;
+      function showNotification(message, colorClass = 'text-green-700') {
+          const copyMessage = document.getElementById('copyMessage');
+          copyMessage.textContent = message;
+          copyMessage.classList.remove('hidden', 'text-green-700', 'text-blue-700', 'text-red-700', 'bg-red-100');
+          copyMessage.classList.add(colorClass);
+          copyMessage.classList.remove('hidden');
+          setTimeout(() => {
+              copyMessage.classList.add('hidden');
+          }, 3000);
+      }
 
-        window.onload = () => {
-            buildUI();
-            load();
-            checkForUpdates();
-            setInterval(checkForUpdates, CHECK_INTERVAL);
+      document.getElementById('copyBtn').addEventListener('click', copyReport);
 
-            shifts.forEach(s => {
-                document.getElementById(`header${s}`).onclick = () => {
-                    document.getElementById(`content${s}`).classList.toggle('hidden');
-                };
-            });
+      document.getElementById('resetBtn').addEventListener('click', function() {
+          const isConfirmed = window.confirm("Yakin ingin menghapus semua data input? Tindakan ini tidak dapat dibatalkan.");
+          if (isConfirmed) {
+              resetAllInputs();
+          }
+      });
 
-            document.querySelectorAll('input, select, textarea').forEach(el => el.oninput = generate);
-            
-            document.getElementById('copyBtn').onclick = () => {
-                const t = document.getElementById('outputReport');
-                t.select();
-                document.execCommand('copy');
-                alert("Laporan berhasil disalin!");
-            };
+      function saveData() {
+          const dataToSave = {};
+          dataToSave['inputCity'] = getStr('inputCity');
+          dataToSave['inputDate'] = getStr('inputDate');
 
-            document.getElementById('darkToggle').onclick = () => {
-                document.documentElement.classList.toggle('dark');
-                localStorage.setItem('dark', document.documentElement.classList.contains('dark'));
-            };
-            if(localStorage.getItem('dark') === 'true') document.documentElement.classList.add('dark');
+          const shifts = ['Pagi1', 'Pagi2', 'Siang', 'Malam'];
+          const inputFields = [
+              'dr', 'drExtra', 'bpjsKet', 'umumKet', 'doaKet', 'meninggalKet', 'mcuKet',
+              'pkmRujukKet', 'rsLainKet', 'pkmRI', 'pkmRJ',
+              'rujukRI', 'rujukRJ', 'labRI', 'labRJ', 'desaRI', 'desaRJ',
+              'sendiriRI', 'sendiriRJ', 'bpjs', 'umum'
+          ];
 
-            generate();
-        };
+          shifts.forEach(shift => {
+              inputFields.forEach(field => {
+                  const id = `${field}${shift}`;
+                  const element = document.getElementById(id);
+                  if (element) {
+                      dataToSave[id] = element.value;
+                  }
+              });
+          });
+          localStorage.setItem('igdReportData', JSON.stringify(dataToSave));
+      }
+
+      function loadData() {
+          const savedData = localStorage.getItem('igdReportData');
+          if (!savedData) return;
+
+          try {
+              const data = JSON.parse(savedData);
+              for (const id in data) {
+                  const element = document.getElementById(id);
+                  if (element && id !== 'inputCity') {
+                      element.value = data[id];
+                  }
+              }
+              showNotification('Data sesi sebelumnya berhasil dimuat!', 'text-blue-700');
+          } catch (e) {
+              localStorage.removeItem('igdReportData');
+              showNotification('Gagal memuat data sesi sebelumnya.', 'text-red-700');
+          }
+      }
+
+      function generateReport() {
+          const city = getStr('inputCity');
+          const dateStr = getStr('inputDate');
+          const timeStr = "00.00";
+
+          const shifts = ['Pagi1', 'Pagi2', 'Siang', 'Malam'];
+          const shiftData = {};
+          const missingDoctors = [];
+
+          let totalKunjungan = 0;
+          let totalMRS = 0;
+          let totalDiniHariPx = 0, totalDiniHariMRS = 0;
+          let totalPagiPx = 0, totalPagiMRS = 0;
+          let totalSiangPx = 0, totalSiangMRS = 0;
+          let totalMalamPx = 0, totalMalamMRS = 0;
+
+          shifts.forEach(shift => {
+              if (!isDoctorFilled(shift)) {
+                  const headerText = document.getElementById(`header${shift}`).textContent.trim();
+                  const cleanShiftName = headerText.replace(/[\uD800-\uDBFF\uDC00-\uDFFF\s]+/g, ' ').trim();
+                  missingDoctors.push(cleanShiftName);
+              }
+
+              const pkmRI = getNum(`pkmRI${shift}`);
+              const pkmRJ = getNum(`pkmRJ${shift}`);
+              const rujukRI = getNum(`rujukRI${shift}`);
+              const rujukRJ = getNum(`rujukRJ${shift}`);
+              const labRI = getNum(`labRI${shift}`);
+              const labRJ = getNum(`labRJ${shift}`);
+              const desaRI = getNum(`desaRI${shift}`);
+              const desaRJ = getNum(`desaRJ${shift}`);
+              const sendiriRI = getNum(`sendiriRI${shift}`);
+              const sendiriRJ = getNum(`sendiriRJ${shift}`);
+
+              const bpjsKetRaw = getStr(`bpjsKet${shift}`);
+              const umumKetRaw = getStr(`umumKet${shift}`);
+              const doaKetRaw = getStr(`doaKet${shift}`);
+              const meninggalKetRaw = getStr(`meninggalKet${shift}`);
+              const mcuKetRaw = getStr(`mcuKet${shift}`);
+              const pkmRujukKetRaw = getStr(`pkmRujukKet${shift}`);
+              const rsLainKetRaw = getStr(`rsLainKet${shift}`);
+
+              const shiftMRS = pkmRI + rujukRI + labRI + desaRI + sendiriRI;
+              const shiftRJ = pkmRJ + rujukRJ + labRJ + desaRJ + sendiriRJ;
+              const shiftJml = shiftMRS + shiftRJ;
+
+              const displayJmlElement = document.getElementById(`displayJml${shift}`);
+              if (displayJmlElement) displayJmlElement.value = shiftJml;
+              const displayMrsElement = document.getElementById(`displayMrs${shift}`);
+              if (displayMrsElement) displayMrsElement.value = shiftMRS;
+
+              shiftData[shift] = {
+                  dr: getDoctorName(shift),
+                  jml: shiftJml, mrs: shiftMRS, rj: shiftRJ,
+                  bpjs: getNum(`bpjs${shift}`),
+                  umum: getNum(`umum${shift}`),
+                  bpjsKet: bpjsKetRaw,
+                  umumKet: umumKetRaw,
+                  doaKet: formatRincianStatusAkhir(doaKetRaw),
+                  meninggalKet: formatRincianStatusAkhir(meninggalKetRaw),
+                  mcuKet: formatRincianStatusAkhir(mcuKetRaw),
+                  pkmRujukKet: formatRincianStatusAkhir(pkmRujukKetRaw),
+                  rsLainKet: formatRincianStatusAkhir(rsLainKetRaw),
+                  pkmRI, pkmRJ, rujukRI, rujukRJ, labRI, labRJ, desaRI, desaRJ, sendiriRI, sendiriRJ
+              };
+
+              totalKunjungan += shiftJml;
+              totalMRS += shiftMRS;
+
+              if (shift === 'Pagi1') { totalDiniHariPx = shiftJml; totalDiniHariMRS = shiftMRS; }
+              else if (shift === 'Pagi2') { totalPagiPx = shiftJml; totalPagiMRS = shiftMRS; }
+              else if (shift === 'Siang') { totalSiangPx = shiftJml; totalSiangMRS = shiftMRS; }
+              else if (shift === 'Malam') { totalMalamPx = shiftJml; totalMalamMRS = shiftMRS; }
+          });
+
+          const doctorWarningMessage = document.getElementById('doctorWarningMessage');
+          const missingDoctorsList = document.getElementById('missingDoctorsList');
+          const copyBtn = document.getElementById('copyBtn');
+
+          if (missingDoctors.length > 0) {
+              missingDoctorsList.textContent = missingDoctors.join(', ');
+              doctorWarningMessage.classList.remove('hidden');
+              copyBtn.disabled = true;
+          } else {
+              doctorWarningMessage.classList.add('hidden');
+              copyBtn.disabled = (totalKunjungan === 0 && !city && !dateStr);
+          }
+
+          let report = "LAPORAN JAGA IGD\n\n";
+          report += `${city || 'Kota'}${city ? ', ' : ''}${dateStr || 'Tanggal'} Jam ${timeStr || '' }\n\n`;
+          report += `TOTAL KUNJUNGAN IGD ${totalKunjungan} PASIEN\n`;
+          report += `DINI HARI : ${totalDiniHariPx} px, MRS: ${totalDiniHariMRS}\n`;
+          report += `PAGI      : ${totalPagiPx} px, MRS: ${totalPagiMRS}\n`;
+          report += `SIANG     : ${totalSiangPx} px, MRS: ${totalSiangMRS}\n`;
+          report += `MALAM     : ${totalMalamPx} px, MRS: ${totalMalamMRS}\n\n`;
+
+          function generateShiftReport(shiftKey, shiftTitle, timeRange) {
+              const data = shiftData[shiftKey];
+              let block = `${shiftTitle}\nJam ${timeRange}\nDokter jaga : ${data.dr || '-'}\n`;
+              block += `Jumlah kunjungan pasien : ${data.jml > 0 ? data.jml : '-'}\n`;
+              block += `Total pasien rawat inap : ${data.mrs > 0 ? data.mrs : '-'}\n\n`;
+              block += "Keterangan :\n";
+              block += `Pasien BPJS : ${data.bpjs > 0 ? data.bpjs : '-'}\n`;
+              block += `Pasien Umum : ${data.umum > 0 ? data.umum : '-'}\n`;
+              block += `Pasien Rawat jalan : ${data.rj > 0 ? data.rj : '-'}\n\n`;
+              block += "Rincian jumlah pasien yang datang:\n";
+              block += `-Rujukan Puskesmas:\n\u2022 Rawat inap : ${data.pkmRI > 0 ? data.pkmRI : '-'}\n\u2022 Rawat jalan : ${data.pkmRJ > 0 ? data.pkmRJ : '-'}\n`;
+              block += `-Bawa surat rujukan :\n\u2022 Rawat inap : ${data.rujukRI > 0 ? data.rujukRI : '-'}\n\u2022 Rawat jalan : ${data.rujukRJ > 0 ? data.rujukRJ : '-'}\n`;
+              block += `-Bawa hasil lab : \n\u2022 Rawat inap : ${data.labRI > 0 ? data.labRI : '-'}\n\u2022 Rawat jalan : ${data.labRJ > 0 ? data.labRJ : '-'}\n`;
+              block += `-Diantar siaga desa : \n\u2022 Rawat inap : ${data.desaRI > 0 ? data.desaRI : '-'}\n\u2022 Rawat jalan : ${data.desaRJ > 0 ? data.desaRJ : '-'}\n`;
+              block += `-Datang sendiri : \n\u2022 Rawat inap : ${data.sendiriRI > 0 ? data.sendiriRI : '-'}\n\u2022 Rawat jalan : ${data.sendiriRJ > 0 ? data.sendiriRJ : '-'}\n\n`;
+              block += "RINCIAN KASUS PASIEN RAWAT JALAN\n";
+              block += `BPJS:\n${data.bpjsKet || '- Tidak ada'}\n\nUMUM:\n${data.umumKet || '- Tidak ada'}\n\n`;
+              block += "RINCIAN STATUS AKHIR\n";
+              block += `DOA (Death On Arrival) :${data.doaKet || '-'}\n`;
+              block += `Meninggal di IGD :${data.meninggalKet || '-'}\n`;
+              block += `MCU (Medical Check Up) :${data.mcuKet || '-'}\n`;
+              block += `Rujukan dari Puskesmas :${data.pkmRujukKet || '-'}\n`;
+              block += `Rujuk ke Rumah Sakit Lain :${data.rsLainKet || '-'}\n`;
+              block += `Covid Rawat Jalan: -\n\n`;
+              return block;
+          }
+
+          report += generateShiftReport('Pagi1', 'Shift Dini Hari', '00.00 - 07.00 Wib');
+          report += generateShiftReport('Pagi2', 'Shift Pagi', '07.00 - 14.00 Wib');
+          report += generateShiftReport('Siang', 'Shift Siang', '14.00 - 21.00 Wib');
+          report += generateShiftReport('Malam', 'Shift Malam', '21.00 - 00.00 Wib');
+
+          document.getElementById('outputReport').value = report;
+      }
+
+      function copyReport() {
+          const reportTextarea = document.getElementById('outputReport');
+          reportTextarea.select();
+          try {
+              document.execCommand('copy');
+              showNotification('Berhasil disalin!', 'text-green-700');
+          } catch (err) {
+              showNotification('Gagal menyalin.', 'text-red-700');
+          }
+      }
+
+      function setupCollapsibleShift(shiftName) {
+          const header = document.getElementById(`header${shiftName}`);
+          const content = document.getElementById(`content${shiftName}`);
+          if (header && content) {
+              header.addEventListener('click', () => {
+                  const isCurrentlyOpen = !content.classList.contains('hidden');
+                  allContentIds.forEach(id => {
+                      const otherContent = document.getElementById(id);
+                      if (otherContent) otherContent.classList.add('hidden');
+                  });
+                  if (!isCurrentlyOpen) {
+                      content.classList.remove('hidden');
+                      header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+              });
+          }
+      }
+
+      function setupChangelogToggle() {
+          const header = document.getElementById('changelogHeader');
+          const content = document.getElementById('changelogContent');
+          const icon = document.getElementById('changelogIcon');
+          if (header && content && icon) {
+              header.addEventListener('click', () => {
+                  const isHidden = content.classList.contains('hidden');
+                  if (isHidden) {
+                      content.classList.remove('hidden');
+                      icon.classList.add('rotate-180');
+                  } else {
+                      content.classList.add('hidden');
+                      icon.classList.remove('rotate-180');
+                  }
+              });
+          }
+      }
+
+      function resetAllInputs() {
+          const allInputs = document.querySelectorAll('input:not([disabled]), textarea, select');
+          allInputs.forEach(input => {
+              if (input.id === 'inputCity') { input.value = 'Mojokerto'; return; }
+              if (input.type === 'number') input.value = '0';
+              else if (input.tagName === 'SELECT') input.value = '';
+              else input.value = '';
+          });
+          const shifts = ['Pagi1', 'Pagi2', 'Siang', 'Malam'];
+          shifts.forEach(shift => {
+              document.getElementById(`displayJml${shift}`).value = '0';
+              document.getElementById(`displayMrs${shift}`).value = '0';
+          });
+          localStorage.removeItem('igdReportData');
+          generateReport();
+          showNotification('Semua data input telah dihapus!', 'text-red-700');
+      }
+
+      const darkToggle = document.getElementById("darkToggle");
+      function applyDarkModePreference() {
+          if (localStorage.getItem("darkMode") === "enabled") document.documentElement.classList.add("dark");
+          else document.documentElement.classList.remove("dark");
+      }
+      darkToggle.addEventListener("click", () => {
+          const isDark = document.documentElement.classList.toggle("dark");
+          if (isDark) localStorage.setItem("darkMode", "enabled");
+          else localStorage.removeItem("darkMode");
+      });
+
+      window.onload = function() {
+          applyDarkModePreference();
+          loadData();
+
+          // --- AKTIFKAN PENGECEKAN UPDATE GITHUB ---
+          checkGitHubUpdate();
+          setInterval(checkGitHubUpdate, GITHUB_CONFIG.checkInterval);
+          // -----------------------------------------
+
+          const allInputs = document.querySelectorAll('input, textarea, select');
+          allInputs.forEach(input => {
+              const eventType = (input.tagName === 'SELECT') ? 'change' : 'input';
+              input.addEventListener(eventType, () => {
+                  generateReport();
+                  saveData();
+              });
+          });
+
+          allShiftNames.forEach(shift => setupCollapsibleShift(shift));
+          setupChangelogToggle();
+          generateReport();
+
+          document.getElementById('navBtn1').addEventListener('click', () => window.open('https://igdrsdh.github.io/Laporan-Bulanan/', '_blank'));
+          document.getElementById('navBtn2').addEventListener('click', () => window.open('https://igdrsdh.github.io/Multitool-IGD/', '_blank'));
+          document.getElementById('navBtn3').addEventListener('click', () => window.open('https://drive.google.com/drive/folders/1yKZu0DHZ0k084Q6p0FAW63Oc7Zy3e9ZF', '_blank'));
+      }
     </script>
-</body>
+  </body>
 </html>
-

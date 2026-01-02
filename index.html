@@ -155,10 +155,11 @@
         </div>
       </div>
 
-      <div
-        class="bg-gradient-to-r from-indigo-500 to-purple-600 p-4 rounded-xl mb-6 text-center text-white shadow-md">
-        <h2 class="text-xl font-bold">🎉 Selamat Tahun Baru 2026 🎉</h2>
-        <p class="text-xs opacity-80">selalu ada cerita setiap shift</p>
+      <div class="bg-gradient-to-r from-indigo-500 to-purple-600 p-4 rounded-xl mb-6 text-center text-white shadow-md">
+         <h2 class="text-xl font-bold">🎉 Selamat Tahun Baru 2026 🎉</h2>
+      <!-- ID ini penting untuk target JavaScript -->
+      <p id="quote-display" class="text-sm italic my-2">"..."</p>
+         <p class="text-xs opacity-80">Emergency Room Team</p>
       </div>
 
       <div 
@@ -1520,6 +1521,10 @@
       window.onload = function() {
           applyDarkModePreference();
           loadData();
+          
+          // Jalankan random quote setiap 1 menit
+          shuffleQuote();
+          setInterval(shuffleQuote, 60000);
 
           // --- AKTIFKAN PENGECEKAN UPDATE GITHUB ---
           checkGitHubUpdate();
@@ -1542,6 +1547,51 @@
           document.getElementById('navBtn1').addEventListener('click', () => window.open('https://igdrsdh.github.io/Laporan-Bulanan/', '_blank'));
           document.getElementById('navBtn2').addEventListener('click', () => window.open('https://igdrsdh.github.io/Multitool-IGD/', '_blank'));
           document.getElementById('navBtn3').addEventListener('click', () => window.open('https://drive.google.com/drive/folders/1yKZu0DHZ0k084Q6p0FAW63Oc7Zy3e9ZF', '_blank'));
+      }
+
+
+      // ------- List Quote Disini
+        const quotes = [
+        "Semangat shift ini, rejeki takkan tertukar.",
+        "Lelahnya hari ini adalah investasi masa depan.",
+        "Apapun shiftnya, kopi tetap kuncinya.",
+        "Satu shift lagi menuju liburan!",
+        "Rekan kerja yang asik adalah bonus gaji.",
+        "Fokus pada pasien, tetap jaga kesehatan sendiri.",
+        "Tahun baru, semangat baru, shift tetap seru!",
+        "Pasien sehat, pulang dengan hati yang kuat.",
+        "Shift malam bukan halangan untuk tetap bersinar.",
+        "Triage dengan tepat, kerja jadi lebih cepat.",
+        "Setiap diagnosa adalah langkah untuk menolong sesama.",
+        "Jaga kekompakan tim, karena kerja IGD adalah kerja bersama.",
+        "Tetap tenang di tengah hiruk pikuk ruang IGD.",
+        "Lelah boleh, menyerah jangan. Pasien butuh kita.",
+        "Kesehatanmu juga penting, jangan lupa makan di sela shift.",
+        "Senyum ramahmu adalah obat pertama bagi pasien.",
+        "Setiap shift punya cerita, jadikan cerita yang bermakna.",
+        "Bekerja di IGD adalah tentang kecepatan dan ketepatan.",
+        "Jadikan setiap lelah sebagai saksi kebaikanmu hari ini.",
+        "Semangat melayani, tulus dari dalam hati.",
+        "Shift pagi penuh energi, shift siang tetap berdedikasi.",
+        "Shift malam penuh waspada, demi nyawa yang berharga.",
+        "Keluarga menunggu di rumah, pulanglah dengan rasa bangga.",
+        "Ingatlah mengapa kamu memilih jalan ini: untuk menolong.",
+        "Ketelitian kita adalah keselamatan bagi mereka.",
+        "Jangan lupa bernapas sejenak.",
+        "Ingat selalu double check ya kak!.",
+        "Setiap infus yang terpasang adalah harapan yang menyala.",
+        "Terima kasih sudah bertahan dan berjuang di shift ini.",
+        "Kamu adalah pahlawan tanpa tanda jasa di balik pintu IGD.",
+        "Sudah dimakan bekalnya?🤭"
+      ];
+
+          // 2. Fungsi untuk mengacak quote
+        function shuffleQuote() {
+        const textElement = document.getElementById('quote-display');
+        if (textElement) {
+            const randomIdx = Math.floor(Math.random() * quotes.length);
+            textElement.innerText = `"${quotes[randomIdx]}"`;
+        }
       }
     </script>
   </body>

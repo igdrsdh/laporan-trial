@@ -7,7 +7,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    <!-- MENGHUBUNGKAN FONT BARU DARI GOOGLE FONTS -->
+      <!-- MENGHUBUNGKAN FONT BARU DARI GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
@@ -180,7 +180,7 @@
             class="app-logo w-14 h-14 md:w-20 md:h-20 object-contain border-none"/>
           <div>
             <h1 class="text-2xl md:text-3xl font-extrabold text-gray-800 leading-tight">Laporan Jaga IGD</h1>
-            <p class="text-gray-500 text-sm font-medium">RS Dian Husada Versi 2.6.1</p>
+            <p class="text-gray-500 text-sm font-medium">RS Dian Husada Versi 2.6.2</p>
           </div>
         </div>
       </div>
@@ -1142,23 +1142,34 @@
         </div>
 
         <div id="changelogContent" class="hidden">
-          <ul class="list-disc list-inside text-gray-600 space-y-2 pl-4">
-            <li class="font-semibold">Update Terbaru</li>
-            <ul class="list-circle list-inside ml-4 text-sm space-y-1">
-              <li>
-                [31 Des 2025] **Penambahan fitur auto update jika tersedia
-                pembaruan.
-              </li>
-              <li>[31 Des 2025] **Selamat Tahun Baru 2026</li>
-            </ul>
-            <li class="font-semibold">Update Sebelumnya</li>
-            <ul class="list-circle list-inside ml-4 text-sm space-y-1">
-              <li>
-                [30 Des 2025] **Perbaikan kalimat pada hasil laporan siap salin.
-              </li>
-            </ul>
-          </ul>
-        </div>
+        <ul class="list-disc list-inside text-gray-600 space-y-4 pl-4">
+    
+        <li>
+           <span class="font-semibold">Update Terbaru</span>
+           <ul class="list-circle list-inside ml-4 text-sm space-y-1 mt-1">
+           <li>[02 Jan 2026] Penyempurnaan UI / UX</li>
+           <li>[02 Jan 2026] Expressive mood</li>
+        </ul>
+        </li>
+
+        <li>
+          <span class="font-semibold">Update Sebelumnya</span>
+          <ul class="list-circle list-inside ml-4 text-sm space-y-1 mt-1">
+          <li>[31 Des 2025] Penambahan fitur auto update jika tersedia pembaruan</li>
+          <li>[31 Des 2025] Selamat Tahun Baru 2026</li>
+        </ul>
+        </li>
+
+        <li>
+          <span class="font-semibold">Update Sebelumnya</span>
+          <ul class="list-circle list-inside ml-4 text-sm space-y-1 mt-1">
+          <li>[30 Des 2025] Perbaikan kalimat pada hasil laporan siap salin</li>
+        </ul>
+        </li>
+    
+      </ul>
+    </div>
+
       </div>
     </div>
 
@@ -1167,7 +1178,7 @@
          LOGIKA PEMBARUAN OTOMATIS GITHUB
          ======================================================== */
       const GITHUB_CONFIG = {
-          repo: "igdrsdh/laporan-trial", // Jangan Lupa Ganti Dengan Repo Asli
+          repo: "igdrsdh/laporan-trial", // Jangan Lupa Ganti Dengan Repo Asli / trial
           branch: "main",
           checkInterval: 300000 // 5 Menit
       };
